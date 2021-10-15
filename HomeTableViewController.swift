@@ -22,6 +22,11 @@ class HomeTableViewController: UITableViewController {
         refresh.addTarget(self, action: #selector(loadTweets), for: .valueChanged)
         tableView.refreshControl = refresh
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.loadTweets()
+    }
 
     @IBAction func logoutButtonClicked(_ sender: Any) {
         TwitterAPICaller.client?.logout()
@@ -99,6 +104,11 @@ class HomeTableViewController: UITableViewController {
         if let imageData = data {
             cell.profileImage.image = UIImage(data: imageData)
         }
+        
+        cell.tweetID = tweet["id"] as? Int ?? -1
+        cell.setLiked(tweet["favorited"] as? Bool ?? false)
+        cell.setRetweet(tweet["retweeted"] as? Bool ?? false)
+        
         return cell
     }
 
