@@ -7,14 +7,27 @@
 //
 
 import UIKit
+import RSKPlaceholderTextView
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UIViewController, UITextViewDelegate {
 
-    @IBOutlet weak var tweetString: UITextView!
+    @IBOutlet var tweetString: UITextView!
+    @IBOutlet weak var characterCount: UILabel!
+    
+    let characterLimit = 280
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.tweetString = RSKPlaceholderTextView(frame: CGRect(x: 0, y: 20, width: self.view.frame.width, height: 100))
+        tweetString.delegate = self
         tweetString.becomeFirstResponder()
+        
+        tweetString.tintColor = UIColor.white
+        tweetString.tintColor = UIColor.black
+        
+        self.view.addSubview(self.tweetString)
+        
     }
     
     @IBAction func cancelTweet(_ sender: Any) {
@@ -36,4 +49,17 @@ class ComposeViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        let newText = NSString(string: textView.text!).replacingCharacters(in: range, with: text)
+        if(characterLimit - newText.count > 0){
+            characterCount.text = String(characterLimit - newText.count)
+        }
+        else {
+            characterCount.text = String(0)
+        }
+        return newText.count < characterLimit
+    }
+
 }

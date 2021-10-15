@@ -175,6 +175,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MFt-2Z-sxG">
                                 <rect key="frame" x="8" y="88" width="398" height="230"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="dq2-W2-vhI"/>
                                 </constraints>
@@ -182,12 +183,21 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="280" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rk1-xq-hbs">
+                                <rect key="frame" x="378" y="326" width="28" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jyj-V2-lBI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Jyj-V2-lBI" firstAttribute="trailing" secondItem="MFt-2Z-sxG" secondAttribute="trailing" constant="8" id="3xv-AR-ZGu"/>
                             <constraint firstItem="MFt-2Z-sxG" firstAttribute="top" secondItem="Jyj-V2-lBI" secondAttribute="top" id="88J-ln-lj4"/>
+                            <constraint firstItem="Jyj-V2-lBI" firstAttribute="bottom" secondItem="Rk1-xq-hbs" secondAttribute="bottom" constant="518" id="9cY-9z-acd"/>
+                            <constraint firstItem="Jyj-V2-lBI" firstAttribute="trailing" secondItem="Rk1-xq-hbs" secondAttribute="trailing" constant="8" id="Swf-vG-Iof"/>
+                            <constraint firstItem="Rk1-xq-hbs" firstAttribute="top" secondItem="MFt-2Z-sxG" secondAttribute="bottom" constant="8" id="XWh-Ic-o0R"/>
                             <constraint firstItem="MFt-2Z-sxG" firstAttribute="leading" secondItem="Jyj-V2-lBI" secondAttribute="leading" constant="8" id="jUr-Wy-v3y"/>
                         </constraints>
                     </view>
@@ -204,6 +214,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="characterCount" destination="Rk1-xq-hbs" id="v70-j1-Gra"/>
                         <outlet property="tweetString" destination="MFt-2Z-sxG" id="Ldc-b7-zDx"/>
                     </connections>
                 </viewController>
