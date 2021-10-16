@@ -28,10 +28,7 @@ class HomeTableViewController: UITableViewController {
         self.loadTweets()
     }
 
-    @IBAction func logoutButtonClicked(_ sender: Any) {
-        TwitterAPICaller.client?.logout()
-        self.dismiss(animated: true, completion: nil)
-        UserDefaults.standard.set(false, forKey: "userLoggedIn")
+    @IBAction func profileButtonClicked(_ sender: Any) {
     }
     
     @objc func loadTweets(){
@@ -52,7 +49,6 @@ class HomeTableViewController: UITableViewController {
             
         }, failure: { (Error) in
             print("Could not retrieve tweet")
-            print("Firiiiirrrrrssstt")
             print(Error)
         })
     }
@@ -74,7 +70,6 @@ class HomeTableViewController: UITableViewController {
             
         }, failure: { (Error) in
             print("Could not retrieve tweet")
-            print("Heerrrreeee")
         })
     }
     
@@ -108,6 +103,65 @@ class HomeTableViewController: UITableViewController {
         cell.tweetID = tweet["id"] as? Int ?? -1
         cell.setLiked(tweet["favorited"] as? Bool ?? false)
         cell.setRetweet(tweet["retweeted"] as? Bool ?? false)
+        
+        //Fix the comment, reply and like count
+//        print(tweet["reply_count"] as? Int)
+//        let commentCount = tweet["reply_count"] as? Int ?? 0
+//        if(commentCount == 0){
+//            cell.commentCount.text = "";
+//        }
+//        else{
+//            if(commentCount >= 1000000){
+//                let temp = round(Double(commentCount)/10000000.0 * 10) / 10.0
+//                cell.commentCount.text = "\(temp)M"
+//            }
+//            else if(commentCount >= 1000){
+//                let temp = round(Double(commentCount)/1000.0 * 10) / 10.0
+//                cell.commentCount.text = "\(temp)K"
+//            }
+//            else {
+//                cell.commentCount.text = "\(commentCount)"
+//            }
+//        }
+        
+        //Retweet Count
+        let retweetCount = tweet["retweet_count"] as? Int ?? 0
+        if(retweetCount == 0){
+            cell.retweetCount.text = "";
+        }
+        else{
+            if(retweetCount >= 1000000){
+                let temp = round(Double(retweetCount)/10000000.0 * 10) / 10.0
+                cell.retweetCount.text = "\(temp)M"
+            }
+            else if(retweetCount >= 1000){
+                let temp = round(Double(retweetCount)/1000.0 * 10) / 10.0
+                cell.retweetCount.text = "\(temp)K"
+            }
+            else {
+                cell.retweetCount.text = "\(retweetCount)"
+            }
+        }
+        
+        //Like Count
+        let likeCount = tweet["favorite_count"] as? Int ?? 0
+        if(likeCount == 0){
+            cell.likeCount.text = "";
+        }
+        else{
+            if(likeCount >= 1000000){
+                let temp = round(Double(likeCount)/10000000.0 * 10) / 10.0
+                cell.likeCount.text = "\(temp)M"
+            }
+            else if(likeCount >= 1000){
+                let temp = round(Double(likeCount)/1000.0 * 10) / 10.0
+                cell.likeCount.text = "\(temp)K"
+            }
+            else {
+                cell.likeCount.text = "\(likeCount)"
+            }
+        }
+        
         
         return cell
     }

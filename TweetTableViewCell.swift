@@ -15,6 +15,10 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var tweetHandle: UILabel!
     @IBOutlet weak var tweet: UITextView!
+    @IBOutlet weak var commentCount: UILabel!
+    @IBOutlet weak var retweetCount: UILabel!
+    @IBOutlet weak var likeCount: UILabel!
+    @IBOutlet weak var tweetImage: UIImageView!
     
     var liked:Bool = false
     var retweeted:Bool = false
